@@ -1,0 +1,210 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dul:	<http://ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+<http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>	rdf:type	dul:Place .
+@prefix locationOnt:	<http://data.linkedevents.org/def/location#> .
+<http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>	rdf:type	locationOnt:YelpBusiness .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+<http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>	rdfs:label	"Mairie de Menton" .
+@prefix dc:	<http://purl.org/dc/elements/1.1/> .
+<http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>	dc:identifier	"mairie-de-menton-menton-2" ;
+	dc:publisher	<http://www.yelp.com> .
+@prefix schema:	<http://schema.org/> .
+<http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/_pa_fPA2SCEUggY3WOwcBQ/o.jpg> .
+<http://data.linkedevents.org/location/15c79693-7da1-36e3-b8b7-c37f09837a30>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Julien Maldinez" ;
+	dc:identifier	"julien-maldinez-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/Rm0wkPnRaxiogcRO4Bezhg/o.jpg> .
+<http://data.linkedevents.org/location/1a43fc39-c6a1-3009-9fd3-a05bb6dddf61>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Le Touareg Someres" ;
+	dc:identifier	"le-touareg-someres-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/Ek2lqYA9oooMgpyJEDaq5Q/o.jpg> .
+<http://data.linkedevents.org/location/1a65064d-eb9d-3a90-895f-cd80c9df95ed>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Mobalpa" ;
+	dc:identifier	"mobalpa-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/UVnfXL3aggeRtNXn2VFUhQ/o.jpg> .
+<http://data.linkedevents.org/location/2356354a-3405-3989-85c5-cfec52d6ed93>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Confitures Herbin" ;
+	dc:identifier	"confitures-herbin-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/A0bKzXeHaQf-zYritxtfSQ/o.jpg> .
+<http://data.linkedevents.org/location/2bd83ff3-07c1-3591-890b-f8efd3c8ff12>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"D'Aqui" ;
+	dc:identifier	"d-aqui-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/cM7K4XhuAd94Tb7ATaLs8g/o.jpg> .
+<http://data.linkedevents.org/location/39b90d24-83a8-3af2-955d-9afb05117098>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Immobiltrend" ;
+	dc:identifier	"immobiltrend-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/jvGRt2_5QlJQ4PkJukydNw/o.jpg> .
+<http://data.linkedevents.org/location/4b06b756-bc79-3ab2-a489-9ee32cd83976>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Candy Shop By Indy" ;
+	dc:identifier	"candy-shop-by-indy-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/Zcvk_OrA1fj_1A5ON3XFTQ/o.jpg> .
+<http://data.linkedevents.org/location/591af64a-20cd-31df-863b-26e0fb87cf1e>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"\u00C0 L'Ombre du Clocher" ;
+	dc:identifier	"\u00E0-l-ombre-du-clocher-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/_vgTYmXe7AaX__zfECZjoQ/o.jpg> .
+<http://data.linkedevents.org/location/5d3db4a4-69d5-317f-89b6-c461abbdd3bb>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"A Boire \u00E0 Manger" ;
+	dc:identifier	"a-boire-\u00E0-manger-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/cVcRS-WmpZtT7rwdTRWsYw/o.jpg> .
+<http://data.linkedevents.org/location/8144d205-07c6-3f3e-8510-5737260a5d08>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Le Vulcano" ;
+	dc:identifier	"le-vulcano-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/CejzSL1xAjG40SQKx-pTzg/o.jpg> .
+<http://data.linkedevents.org/location/8fd964b0-1dae-380c-8b43-8028545ff6f3>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Edwige Coffee" ;
+	dc:identifier	"edwige-coffee-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/D-dXhtd6idVFGme0wXfjyg/o.jpg> .
+<http://data.linkedevents.org/location/96460430-34eb-39d4-9e17-7144eb256117>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"L'Ardoise" ;
+	dc:identifier	"l-ardoise-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/rWcCHF7UhZEN_EG9Plf-Vw/o.jpg> .
+@prefix ns6:	<http://data.linkedevents.org/location/> .
+ns6:b5c3c0ae-8587-379b-b773-85dfff26ec0a	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Menton" ;
+	dc:identifier	"menton-menton-2" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/ui_GZzmfI-6yJCTWImM28A/o.jpg> .
+ns6:d16646bb-cf75-35a3-ab22-2c45e5c2a411	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Central Park Coffee" ;
+	dc:identifier	"central-park-coffee-menton-2" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/ekr3HA7WrThkUrL6dzWQKw/o.jpg> .
+ns6:d5eafbd9-b3b7-381c-8ff1-72a7aacf9059	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"La Cantinella" ;
+	dc:identifier	"la-cantinella-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/2lijO37-j-d_m86XIFVwhw/o.jpg> .
+ns6:de5abd6b-4241-3862-b785-014f18a675e3	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Azureval" ;
+	dc:identifier	"azureval-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/WOmuar7_G_oLOtuTbAZ4wQ/o.jpg> .
+ns6:eb1b0c2d-24d7-30ba-a4f6-0e004a881634	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Fleur de Sel" ;
+	dc:identifier	"fleur-de-sel-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/TrVPbR-rgWoLdG8kQCpI5Q/o.jpg> .
+<http://data.linkedevents.org/location/0237659f-f83b-341b-b446-3319211f8b61>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Les Halles" ;
+	dc:identifier	"les-halles-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/Qci0uzPZpeCbdpQQjEPakw/o.jpg> .
+<http://data.linkedevents.org/location/0f87a643-5e5a-37db-844c-5b22026f6a3c>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"L.A Yogurteria" ;
+	dc:identifier	"l-a-yogurteria-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/fkQdT5qkH4gYIEFWwjyD-g/o.jpg> .
+<http://data.linkedevents.org/location/1294a7e7-6f3d-31d3-b97e-aa004f227a2d>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Le Taj" ;
+	dc:identifier	"le-taj-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/CGcN-hU0f5iq_YjuU6LRHg/o.jpg> .
+<http://data.linkedevents.org/location/12baff59-d70e-3ca2-a285-a0e1dfb781df>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"C\u00F3t\u00E9 Sud" ;
+	dc:identifier	"c\u00F3t\u00E9-sud-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/lEh64RnA0Ks4K50q9BTS_Q/o.jpg> .
+<http://data.linkedevents.org/location/132de287-9783-3443-987d-7c2c05698284>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Cr\u00EAperie Saint Michel" ;
+	dc:identifier	"cr\u00EAperie-saint-michel-menton-3" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/LFM2iKG6r2ND27ainqgWRA/o.jpg> .
+<http://data.linkedevents.org/location/14e79ac9-0b78-3769-839c-6afeabe09ada>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"March\u00E9 municipal" ;
+	dc:identifier	"march\u00E9-municipal-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/cnKgIxEAnl_SFxolfWh-Uw/o.jpg> .
+<http://data.linkedevents.org/location/2a0824bc-2de4-3405-a8a1-7437314ad535>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"La Villa de Chine Restaurant" ;
+	dc:identifier	"la-villa-de-chine-restaurant-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/MtbgDPP3mwRkpfQ2D8Sqrg/o.jpg> .
+<http://data.linkedevents.org/location/46d30fa5-06d0-3f6d-a01c-30064d2b99da>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Al Dente" ;
+	dc:identifier	"al-dente-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/n0gPzcEgZW3TJHFNy6wZWQ/o.jpg> .
+<http://data.linkedevents.org/location/51b14283-3e3d-33e6-ae8a-a91f3045bb2a>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Sunday's" ;
+	dc:identifier	"sundays-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/a8ApTJlTrkSI3jDf6egJRw/o.jpg> .
+<http://data.linkedevents.org/location/58b9177c-eba2-3090-9a98-37111a5669cd>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Huilerie Saint Michel" ;
+	dc:identifier	"huilerie-saint-michel-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/VZY3p87Ornh1dRnwsKBcAA/o.jpg> .
+<http://data.linkedevents.org/location/5e65ac9e-ce30-363f-87e2-fe79ce1c7bb7>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Le Martina" ;
+	dc:identifier	"le-martina-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/-AytACaEGL8NKizrgchDgQ/o.jpg> .
+<http://data.linkedevents.org/location/60fb208c-4bcb-31b0-b149-183a7a6c1073>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Au Pays du Citron" ;
+	dc:identifier	"au-pays-du-citron-menton-2" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media2.fl.yelpcdn.com/bphoto/M2Jvw4YeYP2i75HzxDBLdQ/o.jpg> .
+<http://data.linkedevents.org/location/67c9b7f5-f06e-3787-99a6-13432b23f69f>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"Sini" ;
+	dc:identifier	"sini-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/z4BECGmonDlh2vjtNWW-8g/o.jpg> .
+<http://data.linkedevents.org/location/705931e9-ab4e-3dfb-903b-994298b3e256>	rdf:type	locationOnt:YelpBusiness ,
+		dul:Place ;
+	rdfs:label	"La Piazzetta" ;
+	dc:identifier	"la-piazzetta-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media3.fl.yelpcdn.com/bphoto/DOJUGTunUVfTqQLMG8cL1w/o.jpg> .
+<http://data.linkedevents.org/location/91010780-3793-38db-8ad7-e43cada69acd>	rdf:type	dul:Place ,
+		locationOnt:YelpBusiness ;
+	rdfs:label	"Le Lido" ;
+	dc:identifier	"le-lido-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media1.fl.yelpcdn.com/bphoto/nxQK8F-9tSHBs4OQ9UpOHQ/o.jpg> .
+<http://data.linkedevents.org/location/964a4700-6978-3398-92a1-d76e92052fff>	rdf:type	dul:Place ;
+	rdfs:label	"L'Ulivo" ;
+	dc:identifier	"l-ulivo-menton" ;
+	dc:publisher	<http://www.yelp.com> ;
+	schema:image	<https://s3-media4.fl.yelpcdn.com/bphoto/YXslqrXzzv_sYoIh0iOyMQ/o.jpg> .

@@ -1,0 +1,23 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "80:5000"
+      - "3030"
+    links:
+      - mongo
+    command: yarn dev
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --noauth --smallfiles

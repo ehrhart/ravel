@@ -1,0 +1,79 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dul:	<http://ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+<http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>	rdf:type	dul:Place .
+@prefix locationOnt:	<http://data.linkedevents.org/def/location#> .
+<http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>	rdf:type	locationOnt:GooglePlaceBusiness .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+<http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>	rdfs:label	"Jean Claude Coiffure" .
+@prefix dc:	<http://purl.org/dc/elements/1.1/> .
+<http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>	dc:identifier	"2aa26f57811d86d924d9de14b3cfaccc1a3b3ccf" ;
+	dc:publisher	<http://www.google.com> .
+@prefix schema:	<http://schema.org/> .
+<http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>	schema:image	<https://lh3.googleusercontent.com/p/AF1QipOZjmbsrMKdHqXKddd095C0Pfvr_lnfOxQqH_X0=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOm8ZhUe-2IZI8b8dRA5ccWEpseA0oAy9omPmfB=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOzDwTgWtmD7Y2v-qjFZxXdXbDRHp7I83i2EZ-q=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipMYaK8MelqxBHhuPDHMJpSYwgd0Ptnwn0Fl-ql6=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPVGbyqdlrkd3qyJgL-hd7KLAGunESlWSlU7fkQ=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipN6RCcHFp9xeyZ-yIt-QrrjvnS2Su00CLHmV-KQ=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPtMMFPqCZNwUqmIve4oxaE0Ss2qXwmhPhmkRdl=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipNO4srcY2EcpLhP8N6FTTqejfe_3aNoAUD0VQ0f=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPv6cLmEqtCAPsd6hid9_jwFORhhCsyzQZ2JbZf=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipNR64DXNVhRc5Cg6b0cWYkOJv_cy4fxgtelXA3Z=s1600-h1600> .
+<http://data.linkedevents.org/location/11245be5-7655-3f87-8026-caa10552666a>	rdf:type	locationOnt:GooglePlaceBusiness ,
+		dul:Place ;
+	rdfs:label	"Laurent Mollard - Physiotherapists" ;
+	dc:identifier	"06b9899030b79f2a7f92b3bf96920cdbfaab963c" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipNmKPFybWYWG0dSLGcbXTLfTXYDEu0azwd6UFPW=s1600-h1149> ,
+		<https://lh3.googleusercontent.com/p/AF1QipO7tNiSiTTH0vKATkjyjw4RyJMNCuVeP-72qzdm=s1600-h1536> ,
+		<https://lh3.googleusercontent.com/p/AF1QipODXaMDrcZ3qcrcpyjwwyJuMHAjWq-HTflOl5TR=s1600-h504> .
+<http://data.linkedevents.org/location/159c096b-d917-300b-b5ae-ece71efe0716>	rdf:type	dul:Place ,
+		locationOnt:GooglePlaceBusiness ;
+	rdfs:label	"\u00E9glise St. Charles" ;
+	dc:identifier	"52c59af7ca8df3cc03e4a42930498ba506f2660d" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipO1ytvJQUNXM8KG9baNu4zfYNyidDFbw4Iv4GL2=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOXRIkpZcYNJyb55dU7VMR2vFW9vDUiq-rT_RR-=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOYIZ0VUHycfeVylhyMM2rDO77c-d9KZmcbyPZe=s1600-h375> ,
+		<https://lh3.googleusercontent.com/p/AF1QipO9AIHYDuTRUXVkDQgdeN4zHeblirO-dA4XyCKQ=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOFDE5gQGmHtrCGuPK5IztxllOjYdSjWx6IKC52=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOoZzbQ2wGsSa_8w5-V3We2jPnjbfVLsikdN11Y=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipMZD8oeaxohBMQFUxrim0HA5l0rNonh4cXADOvf=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipNcbY-Vxho1ogkBfnwnlc6ygACqrTg02Eg55rWr=s1600-h1600> .
+<http://data.linkedevents.org/location/355c37d2-d006-3c38-8f0e-2fe0ccce269e>	rdf:type	locationOnt:GooglePlaceBusiness ,
+		dul:Place ;
+	rdfs:label	"Pizza Love" ;
+	dc:identifier	"f148b93b5d0179be1e1dec30a1df317bc8b4967e" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipNiKpJ0wgbTZr3pKFcuP27aiHwG8MpRWUslPq9N=s1600-h1536> .
+<http://data.linkedevents.org/location/3fea0796-1333-335a-b652-c89c04e30eca>	rdf:type	locationOnt:GooglePlaceBusiness ,
+		dul:Place ;
+	rdfs:label	"Boucherie Bio" ;
+	dc:identifier	"44f8d39818bc0d37bed43488c5d319434cbfa192" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipNTQIIr3MUMRhyPLxBfIK7e1NysDe_HmRvLl26s=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipNc4tMkYl8lU5ZPfb-D3gYb_0qCQjPiFjykr-Nu=s1600-h704> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPod5D97gxnQ_MGX6GASFTJ1ZIC5qyqu0dXHNE1=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPrqaQcOdEKQ4JDTf6vla1CEbGuy4suFCcbu9Fh=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipNxezX62SXQ8JrhbhICnatDMdc37ZwbLmY71e-m=s1600-h1536> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOa4nokPeBG8JMzAYrVqmuuNuSvlzO7llU9vp3g=s1600-h1600> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPN-XrApgWEYqifOxx2VauKhEOJV3TGQk4UGeg1=s1600-h1210> .
+<http://data.linkedevents.org/location/3ffd816c-f507-3c86-8551-f5e164c12d7a>	rdf:type	locationOnt:GooglePlaceBusiness ,
+		dul:Place ;
+	rdfs:label	"ABC Distribution" ;
+	dc:identifier	"fbdee1fbe989300d9d848cea8e279647f92bd09f" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipM7k6GAEVg51vHZEi4UdVHDSTohFMcGvPxkRGaL=s1600-h1113> ,
+		<https://lh3.googleusercontent.com/p/AF1QipPNj-Q2sDTrNar5SoqjDDLrV_xbFq9xHPO5h-dq=s1600-h998> ,
+		<https://lh3.googleusercontent.com/p/AF1QipOEqYMAc_ymrKuWMC4wkqV4DcTQ63XvFcsnLRFh=s1600-h630> .
+<http://data.linkedevents.org/location/4dc98921-3942-3ff3-8771-99182d76aba4>	rdf:type	locationOnt:GooglePlaceBusiness ,
+		dul:Place ;
+	rdfs:label	"Maison de la presse" ;
+	dc:identifier	"3faf3fc92eb5a26f3e074de188953e50e7239841" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipPaDZKvMToCwxpokIVAdUkthCNlGQB5CtI5fCCU=s1600-h1600> .
+<http://data.linkedevents.org/location/656439d1-ca01-378c-8831-dff50fc5cdf0>	rdf:type	dul:Place ;
+	rdfs:label	"Paroisse Notre-Dame de Vie - Secr\u00E9tariat Central" ;
+	dc:identifier	"9262ff47fb320ea5a1052fb4891e1f60761c4414" ;
+	dc:publisher	<http://www.google.com> ;
+	schema:image	<https://lh3.googleusercontent.com/p/AF1QipM5m2UAxzf7XD0ddGKpkGo22nfRuH_HMCeZXG6A=s1600-h375> .

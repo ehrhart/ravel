@@ -1,0 +1,51 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dul:	<http://ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+<http://data.linkedevents.org/location/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	rdf:type	dul:Place .
+@prefix locationOnt:	<http://data.linkedevents.org/def/location#> .
+<http://data.linkedevents.org/location/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	rdf:type	locationOnt:FourSquareBusiness .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+<http://data.linkedevents.org/location/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	rdfs:label	"Cime de Chavalet" .
+@prefix dc:	<http://purl.org/dc/elements/1.1/> .
+<http://data.linkedevents.org/location/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	dc:identifier	"5124a89ee4b0f396a7a954a1" .
+@prefix lode:	<http://linkedevents.org/ontology/> .
+<http://data.linkedevents.org/location/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	lode:poster	<http://data.linkedevents.org/media/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0> ;
+	dc:publisher	<http://www.foursquare.com> .
+@prefix ma-ont:	<http://www.w3.org/ns/ma-ont#> .
+<http://data.linkedevents.org/media/9e7c67f9-4e0f-3bce-995f-1b4ccf1a64a0>	ma-ont:locator	<https://igx.4sqi.net/img/general/612x612/6426098_0X0Zx9YbxplzSPl4kwKg8ZHM82KEBhJZklxcQUt0Dc4.jpg> .
+@prefix ns7:	<http://data.linkedevents.org/location/> .
+ns7:de847eae-2170-330d-af13-ace82c2d1a7c	rdf:type	dul:Place ,
+		locationOnt:FourSquareBusiness ;
+	rdfs:label	"Golf d'Auron" ;
+	dc:identifier	"5030f37ce4b045150b77c81a" .
+@prefix ns8:	<http://data.linkedevents.org/media/> .
+ns7:de847eae-2170-330d-af13-ace82c2d1a7c	lode:poster	ns8:de847eae-2170-330d-af13-ace82c2d1a7c ;
+	dc:publisher	<http://www.foursquare.com> .
+ns8:de847eae-2170-330d-af13-ace82c2d1a7c	ma-ont:locator	<https://igx.4sqi.net/img/general/1080x1080/35074498_520iTjdo-Qcf3Ruc9CXNSGQ7glCpPA8ADIiiDoiaomQ.jpg> .
+<http://data.linkedevents.org/location/4576b9f3-df97-32f1-a33f-ba2229e95cfc>	rdf:type	locationOnt:FourSquareBusiness ,
+		dul:Place ;
+	rdfs:label	"Sauma-Longue" ;
+	dc:identifier	"4bc04226920eb71360bb182c" ;
+	lode:poster	<http://data.linkedevents.org/media/4576b9f3-df97-32f1-a33f-ba2229e95cfc> ;
+	dc:publisher	<http://www.foursquare.com> .
+<http://data.linkedevents.org/media/4576b9f3-df97-32f1-a33f-ba2229e95cfc>	ma-ont:locator	<https://igx.4sqi.net/img/general/1440x1920/12844804_Ky0aO1rn543knI1sR9xNCw1mhQSKV4kiasl5d8h3nMU.jpg> .
+<http://data.linkedevents.org/location/3e8bd441-ff35-3077-84f9-5d8f5c6e412f>	rdf:type	locationOnt:FourSquareBusiness ,
+		dul:Place ;
+	rdfs:label	"Pistes d'Auron" ;
+	dc:identifier	"4efb22c1a69dea74fdf32730" ;
+	lode:poster	<http://data.linkedevents.org/media/3e8bd441-ff35-3077-84f9-5d8f5c6e412f> ;
+	dc:publisher	<http://www.foursquare.com> .
+<http://data.linkedevents.org/media/3e8bd441-ff35-3077-84f9-5d8f5c6e412f>	ma-ont:locator	<https://igx.4sqi.net/img/general/720x720/310527__cZ_ro51k3OMwxDS8LgSpriUTSVzpp1McWMfkWUyC0M.jpg> .
+<http://data.linkedevents.org/location/6cd051cf-e391-3edf-8fd7-4477d79e4711>	rdf:type	dul:Place ,
+		locationOnt:FourSquareBusiness ;
+	rdfs:label	"Circuit VTT - Auron" ;
+	dc:identifier	"4c306edc452620a1321d1f0f" ;
+	lode:poster	<http://data.linkedevents.org/media/6cd051cf-e391-3edf-8fd7-4477d79e4711> ;
+	dc:publisher	<http://www.foursquare.com> .
+<http://data.linkedevents.org/media/6cd051cf-e391-3edf-8fd7-4477d79e4711>	ma-ont:locator	<https://igx.4sqi.net/img/general/960x720/20142542_N2xb5YtyET4gbMBZPFK23VES8dlOOq3Zzpct_3kzees.jpg> .
+ns7:dbb01d87-a0e9-3e12-b0ec-051477d9c076	rdf:type	locationOnt:FourSquareBusiness ,
+		dul:Place ;
+	rdfs:label	"Telesiege Du Blainon" ;
+	dc:identifier	"51332e62e4b0e80ce142b09e" ;
+	lode:poster	ns8:dbb01d87-a0e9-3e12-b0ec-051477d9c076 ;
+	dc:publisher	<http://www.foursquare.com> .
+ns8:dbb01d87-a0e9-3e12-b0ec-051477d9c076	ma-ont:locator	<https://igx.4sqi.net/img/general/960x540/39069510__-EAdY-0cPVb_C6pBZYQkTJ-DVxdhjS-DxIZUXxh7Hw.jpg> .

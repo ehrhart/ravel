@@ -1,0 +1,44 @@
+@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://localhost:3000/alignments#1> a align:Alignment;
+  align:measure "1.0"^^xsd:float;
+    align:map [
+  a align:Cell;
+  align:entity1 <http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>;
+  align:entity2 <http://data.linkedevents.org/location/05e9716a-b968-3c41-94fb-41658467c6d3>;
+  align:measure "1.0"^^xsd:float;
+  align:relation "="
+].
+<http://localhost:3000/alignments#2> a align:Alignment;
+    align:map [
+  a align:Cell;
+  align:entity1 <http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>;
+  align:entity2 <http://data.linkedevents.org/location/15c79693-7da1-36e3-b8b7-c37f09837a30>;
+  align:measure "1.0"^^xsd:float;
+  align:relation "="
+].
+<http://localhost:3000/alignments#3> a align:Alignment;
+    align:map [
+  a align:Cell;
+  align:entity1 <http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>;
+  align:entity2 <http://data.linkedevents.org/location/1a43fc39-c6a1-3009-9fd3-a05bb6dddf61>;
+  align:measure "1.0"^^xsd:float;
+  align:relation "="
+].
+<http://localhost:3000/alignments#4> a align:Alignment;
+    align:map [
+  a align:Cell;
+  align:entity1 <http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>;
+  align:entity2 <http://data.linkedevents.org/location/1a65064d-eb9d-3a90-895f-cd80c9df95ed>;
+  align:measure "1.0"^^xsd:float;
+  align:relation "="
+].
+<http://localhost:3000/alignments#5> a align:Alignment;
+    align:map [
+  a align:Cell;
+  align:entity1 <http://data.linkedevents.org/location/07f7c2a6-dd5e-3228-b9ac-4e29899a0517>;
+  align:entity2 <http://data.linkedevents.org/location/2356354a-3405-3989-85c5-cfec52d6ed93>;
+  align:measure "1.0"^^xsd:float;
+  align:relation "="
+].
