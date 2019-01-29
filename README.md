@@ -1,6 +1,6 @@
-# PFE 2019
+# RAVEL: RDF Alignments Validation for Evaluation and Learning
 
-This web application guides the user through the process of creating and validating alignments between different data sources.
+RAVEL is a web application which guides the user through the process of creating and validating alignments between different data sources.
 
 The following features are available:
 
@@ -9,7 +9,7 @@ The following features are available:
 * It supports multiple data sources formats, such as Turtle, TriG, N-Triples, N-Quads, and Notation3 (N3).
 * It allows the user to create ground truth alignments between entities that will be serialized in the EDOAL format.
 
-Check out the [live demo](https://ehrhart-pfe.herokuapp.com/) of the web application.
+Check out the [live demo](https://ravel-demo.herokuapp.com/) of the web application.
 
 # Getting Started
 
