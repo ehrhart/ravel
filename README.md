@@ -25,3 +25,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ## Production
 
 Run `npm run build` to build the app for production to the `build` folder.
+
+## Deploy with Docker
+
+1. Run `docker-compose build` to build the containers.<br>
+2. Run `docker-compose up` to start the containers.
