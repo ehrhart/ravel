@@ -1,23 +1,21 @@
 version: "2"
 services:
   app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    build: .
+    network_mode: bridge
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/client/node_modules
+      - /usr/src/app/client/build
     ports:
-      - "80:5000"
-      - "3030"
+      - "5000:5000"
     links:
       - mongo
-    command: yarn dev
   mongo:
     image: mongo
     restart: always
-    container_name: mongodb
+    network_mode: bridge
     volumes:
       - ./mongo-data:/data/db
-    ports:
-      - "27017:27017"
     command: mongod --noauth --smallfiles
