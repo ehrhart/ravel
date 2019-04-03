@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Connecting to MongoDB
-mongoose.connect('mongodb://mongo/ravel', {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ravel', {
   useNewUrlParser: true,
   autoReconnect: true,
 });
