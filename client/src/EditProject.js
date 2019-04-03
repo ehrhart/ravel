@@ -1,5 +1,4 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Icon, Button, Row, Col, Form, Input } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 import ProjectSettingsForm from './ProjectSettingsForm';
@@ -36,7 +35,7 @@ class EditProject extends Component {
   /*
   start = async (e) => {
     e.preventDefault();
-    
+
     const { activeProject } = projectStore.state;
     this.props.history.push(`/projects/${activeProject.state.id}/configure`);
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, AutoComplete, Breadcrumb, Button, Form, Input, Select, Modal, Radio } from 'antd';
+import { Layout, Button, Select, Typography, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 import RDFPropertiesTable from './RDFPropertiesTable';
@@ -9,10 +9,10 @@ import { projectStore } from './models/projects';
 
 import Api from './Api';
 
-const { Component, PureComponent } = React;
+const { Component } = React;
 const { Content } = Layout;
-const FormItem = Form.Item;
 const Option = Select.Option;
+const { Paragraph } = Typography;
 
 class Configure extends Component {
   state = {
@@ -56,7 +56,7 @@ class Configure extends Component {
 
   onSelectSourceRdfType = (value) => {
     console.log(`onSelectSourceRdfType, selected ${value}`);
-    
+
     projectStore.state.activeProject.update(s => s.selectedSourceRdfType = value);
 
     // Save changes
@@ -67,7 +67,7 @@ class Configure extends Component {
 
   onSelectTargetRdfType = (value) => {
     console.log(`onSelectTargetRdfType, selected ${value}`);
-    
+
     projectStore.state.activeProject.update(s => s.selectedTargetRdfType = value);
 
     // Save changes
@@ -86,7 +86,7 @@ class Configure extends Component {
       console.log('loadRdfProperties: Store not found');
       return;
     }
-    
+
     const { selectedSourceRdfType } = projectStore.state.activeProject.state;
     if (!selectedSourceRdfType) {
       console.log('loadRdfProperties: No selected RDF type');
@@ -96,12 +96,6 @@ class Configure extends Component {
     const { store } = this.state.loadedSourceDataset;
 
     console.log('LOAD RDF PROPERTIES');
-
-    var sparqlQuery = 
-      `SELECT DISTINCT ?p WHERE {
-         ?s a <${selectedSourceRdfType}> .
-         ?s ?p ?o .
-      }`;
 
     let rdfProperties = [];
     const subjects = store.getSubjects('http://www.w3.org/1999/02/22-rdf-syntax-ns#type', selectedSourceRdfType).map(o => o.id);
@@ -194,7 +188,7 @@ class Configure extends Component {
   removeProperty = (row) =>{
     const { activeProject } = projectStore.state;
     activeProject.update(s => {
-      s.selectedRdfProperties = s.selectedRdfProperties.filter(o => o.propertyName !== row.propertyName); 
+      s.selectedRdfProperties = s.selectedRdfProperties.filter(o => o.propertyName !== row.propertyName);
     });
 
     // Save changes
@@ -225,7 +219,7 @@ class Configure extends Component {
 
     return (
       <div>
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', margin: 0, minHeight: 280 }}>
           <strong>Select the Source Type:</strong>
           <Select
             defaultValue={activeProject.state.selectedSourceRdfType}
@@ -239,7 +233,7 @@ class Configure extends Component {
             {rdfTypesList}
           </Select>
 
-          <br /><br />
+          <Divider />
 
           <strong>Select the Target Type:</strong>
           <Select
@@ -254,9 +248,14 @@ class Configure extends Component {
             {rdfTypesList}
           </Select>
 
-          <br /><br />
+          <Divider />
 
-          <p>Properties to display:</p>
+          <Paragraph>
+            Properties to display:
+          </Paragraph>
+          <Paragraph>
+            <Button type="primary" onClick={this.addProperty}>Add property</Button>
+          </Paragraph>
           <RDFPropertiesTable
             data={activeProject.state.selectedRdfProperties}
             onMoveRow={this.moveProperty}
@@ -264,11 +263,11 @@ class Configure extends Component {
             onRemove={this.removeProperty}
           />
 
-          <p style={{ textAlign: 'right' }}><Button type="primary" onClick={this.addProperty}>Add property</Button></p>
+          <Divider />
 
-          <br />
-
-          <p><Button type="primary" onClick={this.start}>Start</Button></p>
+          <Paragraph>
+            <Button type="primary" icon="check" onClick={this.start}>Start</Button>
+          </Paragraph>
         </Content>
 
         <CustomizedForm

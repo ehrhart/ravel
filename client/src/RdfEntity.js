@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Typography } from 'antd';
 
 const { Component } = React;
+const { Paragraph } = Typography;
 
 class RdfEntity extends Component {
   renderItem = (item) => {
@@ -12,10 +13,14 @@ class RdfEntity extends Component {
       <Layout key={item.propertyName} style={{ background: '#fff' }}>
         <h3>{item.label || item.propertyName}</h3>
         {(rdf && item.type === 'text') &&
-          <p>{rdf ? rdf[item.propertyName] : ''}</p>
+          <Paragraph>
+            {rdf ? rdf[item.propertyName] : ''}
+          </Paragraph>
         }
         {item.type === 'image' &&
-          <p>{rdf ? <img src={rdf[item.propertyName]} alt={item.label || item.propertyName} style={{ maxWidth: '100%', maxHeight: '180px' }} /> : ''}</p>
+          <Paragraph>
+            {rdf ? <img src={rdf[item.propertyName]} alt={item.label || item.propertyName} style={{ maxWidth: '100%', maxHeight: '180px' }} /> : ''}
+          </Paragraph>
         }
       </Layout>
     );

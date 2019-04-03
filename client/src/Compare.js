@@ -1,23 +1,16 @@
 import React from 'react';
-import { Layout, Menu, Progress, Pagination, Breadcrumb, Button, Form, Input, Select, Modal, Radio, Row, Col, Icon } from 'antd';
+import { Layout, Menu, Progress, Pagination, Button, Row, Col, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { observer, inject } from 'mobx-react';
-import builder from 'xmlbuilder';
 import N3 from 'n3';
 
 import RdfEntity from './RdfEntity';
-
 import { projectStore } from './models/projects';
-
 import Api from './Api';
 
-const { Component, PureComponent } = React;
+const { Component } = React;
 const { Content } = Layout;
-const FormItem = Form.Item;
-const Option = Select.Option;
-const { Header, Footer } = Layout;
-const { DataFactory } = N3;
-const { namedNode, literal, defaultGraph, quad } = DataFactory;
+const { Header } = Layout;
+const { namedNode, literal } = N3.DataFactory;
 const { SubMenu } = Menu;
 
 class Compare extends Component {
@@ -47,13 +40,13 @@ class Compare extends Component {
     const project = (await Api.get(`projects/${projectId}`)).data;
     if (project) {
       console.log('onRouteChanged, project: ', project);
+
       await projectStore.setActiveProject(project);
 
       const { activeProject } = projectStore.state;
       const loadedSourceDataset = await activeProject.state.loadDataset(activeProject.state.sourceDataset);
       const loadedTargetDataset = await activeProject.state.loadDataset(activeProject.state.targetDataset);
       const loadedAlignments = await activeProject.state.loadAlignments();
-
       loadedSourceDataset.entities = await this.loadEntities(loadedSourceDataset.store);
       loadedTargetDataset.entities = await this.loadEntities(loadedTargetDataset.store);
 
@@ -80,25 +73,26 @@ class Compare extends Component {
     return store.getSubjects('http://www.w3.org/1999/02/22-rdf-syntax-ns#type', selectedSourceRdfType).map(o => o.id);
   }
 
-  export = (e) => {
+  exportEDOAL = (e) => {
     const { entitiesPermutations } = this.state;
 
-    const writer = N3.Writer({ prefixes: {
+    const writer = new N3.Writer({ prefixes: {
       align: 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#',
       xsd: 'http://www.w3.org/2001/XMLSchema#',
-    } });
+      rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    }, format: 'Turtle' });
     entitiesPermutations.forEach((link, index) => {
       if (link.score > 0) {
         writer.addQuad(
           namedNode(`${window.location.origin}/alignments#${index + 1}`),
-          namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+          namedNode('rdf:type'),
           namedNode('align:Alignment')
         );
         writer.addQuad(
           namedNode(`${window.location.origin}/alignments#${index + 1}`),
           namedNode('align:map'),
           writer.blank([{
-            predicate: namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+            predicate: namedNode('rdf:type'),
             object: namedNode('align:Cell'),
           },{
             predicate: namedNode('align:entity1'),
@@ -117,19 +111,39 @@ class Compare extends Component {
       }
     });
     writer.end((error, result) => {
-      console.log(result)
+      this.download(result, 'alignments.ttl');
+    });
+  }
 
-      var pom = document.createElement('a');
-      pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(result));
-      pom.setAttribute('download', 'alignments.ttl');
-      if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        pom.dispatchEvent(event);
-      } else {
-        pom.click();
+  exportOWL = (e) => {
+    const { entitiesPermutations } = this.state;
+
+    const writer = new N3.Writer({ format: 'N-Triples' });
+    entitiesPermutations.forEach((link, index) => {
+      if (link.score > 0) {
+        writer.addQuad(
+          namedNode(link.entity1),
+          namedNode('http://www.w3.org/2002/07/owl#sameAs'),
+          namedNode(link.entity2)
+        );
       }
     });
+    writer.end((error, result) => {
+      this.download(result, 'alignments.nt');
+    });
+  }
+
+  download = (content, fileName) => {
+    const pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+    pom.setAttribute('download', fileName);
+    if (document.createEvent) {
+      const event = document.createEvent('MouseEvents');
+      event.initEvent('click', true, true);
+      pom.dispatchEvent(event);
+    } else {
+      pom.click();
+    }
   }
 
   selectScore = (score) => {
@@ -153,7 +167,6 @@ class Compare extends Component {
     const entitiesPermutations = [];
 
     if (this.state.loadedAlignments && this.state.loadedAlignments.links) {
-      const links = [];
       this.state.loadedAlignments.links.forEach(link => {
         const { entity1, entity2, measure } = link;
         entitiesPermutations.push({
@@ -161,7 +174,6 @@ class Compare extends Component {
           entity2,
           score: measure,
         });
-        console.log('PUSH TO PERMS:', entity1, entity2, measure);
       });
     } else {
       this.state.loadedSourceDataset.entities.forEach(entity1 => {
@@ -270,7 +282,7 @@ class Compare extends Component {
             <Col span={3}>
               <Button onClick={() => { this.props.history.goBack() }}>Back</Button>
             </Col>
-            <Col span={18}>
+            <Col span={17}>
               <Row type="flex" justify="center" gutter={8}>
                 {(loadedAlignments && loadedAlignments.links) && (
                   <Col>Is this correct?</Col>
@@ -280,15 +292,18 @@ class Compare extends Component {
                 <Col><Button type="primary" onClick={() => { this.selectScore(-1) }} ghost={currentScore !== -1.0}>Different</Button></Col>
               </Row>
             </Col>
-            <Col span={3}>
+            <Col span={4}>
               <Menu
                 //onClick={this.handleClick}
                 //selectedKeys={[this.state.current]}
                 theme="light"
                 mode="horizontal"
+                style={{ borderBottom: 0 }}
               >
-                <SubMenu title={<span className="submenu-title-wrapper"><Icon type="setting" />Export</span>}>
-                  <Menu.Item key="setting:1" onClick={this.export}>Alignments</Menu.Item>
+                <SubMenu title={<span className="submenu-title-wrapper">
+                  <Icon type="cloud-download" />Export alignments</span>}>
+                  <Menu.Item key="export:edoal" onClick={this.exportEDOAL}>EDOAL format (Turtle)</Menu.Item>
+                  <Menu.Item key="export:owl" onClick={this.exportOWL}>OWL format (N-Triples)</Menu.Item>
                 </SubMenu>
               </Menu>
               {/*<span style={{ color: '#fff' }}>Changes have been saved!</span>*/}

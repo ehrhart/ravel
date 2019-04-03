@@ -1,13 +1,12 @@
 import React from 'react';
-import { Layout, Button, Form, Input, Select, Modal, Radio, Upload, Icon, Tabs } from 'antd';
-import { observer, inject } from 'mobx-react';
+import { Button, Form, Input, Select, Modal, Upload, Icon, Tabs, Typography } from 'antd';
 
-import { projectStore } from './models/projects';
 import Api from './Api';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const TabPane = Tabs.TabPane;
+const { Paragraph, Text } = Typography;
 
 class AlignmentsOptionsForm extends React.Component {
   state = {
@@ -112,7 +111,7 @@ class AlignmentsOptionsForm extends React.Component {
   }
 
   render() {
-    const { form, alignments } = this.props;
+    const { alignments } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { modalVisible } = this.state;
 
@@ -131,8 +130,10 @@ class AlignmentsOptionsForm extends React.Component {
     return (
       <div>
         <div>
-          <strong>{this.props.label}</strong>
-          <p>{displayAlignmentsName(alignments)}</p>
+          <Text strong>{this.props.label}</Text>
+          <Paragraph>
+            {displayAlignmentsName(alignments)}
+          </Paragraph>
           <Button type="primary" onClick={() => this.handleModalVisible(true)}>Edit</Button>
         </div>
         <Modal
@@ -150,7 +151,9 @@ class AlignmentsOptionsForm extends React.Component {
           <Form layout="vertical">
             <Tabs defaultActiveKey="1" size="small" tabPosition="left">
               <TabPane tab="Files" key="1">
-                <p><Button onClick={this.useSampleAlignments}>Use sample alignments</Button></p>
+                <Paragraph>
+                  <Button onClick={this.useSampleAlignments}>Use sample alignments</Button>
+                </Paragraph>
                 <FormItem label="Alignments Upload">
                   {getFieldDecorator('upload', {
                     valuePropName: 'fileList',
@@ -163,10 +166,12 @@ class AlignmentsOptionsForm extends React.Component {
                       beforeUpload={this.beforeUpload}
                       //onChange={this.handleUploadChange}
                     >
-                      <p className="ant-upload-drag-icon">
+                      <Paragraph className="ant-upload-drag-icon">
                         <Icon type="inbox" />
-                      </p>
-                      <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                      </Paragraph>
+                      <Paragraph className="ant-upload-text">
+                        Click or drag file to this area to upload
+                      </Paragraph>
                     </Upload.Dragger>
                   )}
                 </FormItem>

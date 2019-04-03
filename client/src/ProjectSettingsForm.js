@@ -1,11 +1,11 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Icon, Button, Row, Col, Form, Input } from 'antd';
+import { Layout, Row, Col, Input, Divider } from 'antd';
 import { debounce } from 'lodash';
 
 import DatasetOptionsForm from './DatasetOptionsForm';
 import AlignmentsOptionsForm from './AlignmentsOptionsForm';
+import { projectStore } from './models/projects';
 
-import { projectStore, Project } from './models/projects';
 const { Content } = Layout;
 
 class ProjectSettingsForm extends React.Component {
@@ -65,16 +65,16 @@ class ProjectSettingsForm extends React.Component {
   }, 500)
 
   render() {
-    const { project } = this.props;
-
     return (
       <Layout>
-        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <Content style={{ background: '#fff', margin: 0, minHeight: 280 }}>
           <div>
             <label><strong>Project name</strong></label>
             <Input value={this.props.project.state.name} onChange={this.handleProjectNameChange} />
           </div>
-          <br />
+
+          <Divider />
+
           <Row type="flex" gutter={16}>
             <Col>
               <DatasetOptionsForm

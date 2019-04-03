@@ -1,13 +1,12 @@
 import React from 'react';
-import { Layout, Button, Form, Input, Select, Modal, Radio, Upload, Icon, Tabs } from 'antd';
-import { observer, inject } from 'mobx-react';
+import { Button, Form, Input, Select, Modal, Upload, Icon, Tabs, Typography } from 'antd';
 
-import { projectStore } from './models/projects';
 import Api from './Api';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const TabPane = Tabs.TabPane;
+const { Paragraph, Text } = Typography;
 
 class DatasetOptionsForm extends React.Component {
   state = {
@@ -142,8 +141,10 @@ class DatasetOptionsForm extends React.Component {
     return (
       <div>
         <div>
-          <strong>{this.props.label}</strong>
-          <p>{displayDatasetName(dataset)}</p>
+          <Text strong>{this.props.label}</Text>
+          <Paragraph>
+            {displayDatasetName(dataset)}
+          </Paragraph>
           <Button type="primary" onClick={() => this.handleModalVisible(true)}>Edit</Button>
         </div>
         <Modal
@@ -161,7 +162,9 @@ class DatasetOptionsForm extends React.Component {
           <Form layout="vertical">
             <Tabs defaultActiveKey="1" size="small" tabPosition="left">
               <TabPane tab="Files" key="1">
-                <p><Button onClick={this.useSampleDataset}>Use sample dataset</Button></p>
+                <Paragraph>
+                  <Button onClick={this.useSampleDataset}>Use sample dataset</Button>
+                </Paragraph>
                 <FormItem label="Dataset Upload">
                   {getFieldDecorator('upload', {
                     valuePropName: 'fileList',
@@ -174,10 +177,12 @@ class DatasetOptionsForm extends React.Component {
                       beforeUpload={this.beforeUpload}
                       //onChange={this.handleUploadChange}
                     >
-                      <p className="ant-upload-drag-icon">
+                      <Paragraph className="ant-upload-drag-icon">
                         <Icon type="inbox" />
-                      </p>
-                      <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                      </Paragraph>
+                      <Paragraph className="ant-upload-text">
+                        Click or drag file to this area to upload
+                      </Paragraph>
                     </Upload.Dragger>
                   )}
                 </FormItem>

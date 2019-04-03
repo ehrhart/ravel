@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { types, flow, getRoot, destroy } from "mobx-state-tree"
 import N3 from 'n3';
 import axios from 'axios';
+import createStore from 'pure-store'
 
 import Api from '../Api';
 
-import createStore from 'pure-store'
+const { namedNode } = N3.DataFactory;
 
 function getLiteralValue(literal) {
   const match = /^"([^]*)"/.exec(literal);
@@ -84,12 +83,11 @@ export class Project {
     const loadedDataset = {};
     Object.assign(loadedDataset, dataset);
 
-    var uri = window.location.origin;
-    var body = await this.readDataset(dataset);
+    const body = await this.readDataset(dataset);
     if (!body) return loadedDataset;
 
     const { quads, prefixes }  = await this.loadStore(body);
-    loadedDataset.store = N3.Store(quads, {
+    loadedDataset.store = new N3.Store(quads, {
       prefixes: prefixes[0],
     });
 
@@ -110,33 +108,49 @@ export class Project {
     const loadedAlignments = {};
     Object.assign(loadedAlignments, this.alignments);
 
-    var uri = window.location.origin;
-    var body = await this.readDataset(this.alignments);
+    const body = await this.readDataset(this.alignments);
     if (!body) return loadedAlignments;
 
     const { quads, prefixes }  = await this.loadStore(body);
-    loadedAlignments.store = N3.Store(quads, {
+    loadedAlignments.store = new N3.Store(quads, {
       prefixes: prefixes[0],
     });
     loadedAlignments.links = [];
 
     try {
-      const subjects = loadedAlignments.store.getSubjects('http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Cell');
-      subjects.forEach(subj => {
-        let entity1 = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#entity1').pop().id;
-        let entity2 = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#entity2').pop().id;
-        let measure = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#measure').pop().id;
-        measure = parseFloat(getLiteralValue(measure));
-        let relation = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#relation').pop().id;
-        relation = getLiteralValue(relation);
+      const owlQuads = loadedAlignments.store.getQuads(null, namedNode('http://www.w3.org/2002/07/owl#sameAs'));
+      if (owlQuads.length > 0) {
+        owlQuads.forEach(quad => {
+          const entity1 = quad.subject.id;
+          const entity2 = quad.object.id;
+          const measure = 1.0;
+          const relation = '=';
 
-        loadedAlignments.links.push({
-          entity1,
-          entity2,
-          measure,
-          relation,
+          loadedAlignments.links.push({
+            entity1,
+            entity2,
+            measure,
+            relation,
+          });
         });
-      });
+      } else {
+        const edoalSubjects = loadedAlignments.store.getSubjects('http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Cell');
+        edoalSubjects.forEach(subj => {
+          const entity1 = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#entity1').pop().id;
+          const entity2 = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#entity2').pop().id;
+          let measure = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#measure').pop().id;
+          measure = parseFloat(getLiteralValue(measure));
+          let relation = loadedAlignments.store.getObjects(subj.id, 'http://knowledgeweb.semanticweb.org/heterogeneity/alignment#relation').pop().id;
+          relation = getLiteralValue(relation);
+
+          loadedAlignments.links.push({
+            entity1,
+            entity2,
+            measure,
+            relation,
+          });
+        });
+      }
 
       console.log('loadedAlignments.links =', loadedAlignments.links);
     } catch (err) {

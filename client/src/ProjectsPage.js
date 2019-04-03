@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Route, withRouter } from 'react-router-dom';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
-import { Layout, Menu, Breadcrumb, Button, Icon, Modal, Popover } from 'antd';
-import { observer, inject } from 'mobx-react';
+import { Layout, Menu, Button, Icon, Modal, Typography, Divider } from 'antd';
 import { throttle } from 'lodash';
 
 import NewProject from './NewProject';
@@ -11,9 +10,10 @@ import Configure from './Configure';
 
 import { projectStore } from './models/projects';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { confirm } = Modal;
+const { Title, Paragraph } = Typography;
 
 class ProjectsPage extends Component {
   state = {
@@ -46,14 +46,18 @@ class ProjectsPage extends Component {
   }, this.props.applyViewportChange);
 
   projectSettings = async (project) => {
-    console.log('projectSettings', project);
     await projectStore.setActiveProject(project);
     this.props.history.push(`/projects/${project.id}/settings`);
   }
 
-  openProject = async (project) => {
+  projectConfiguration = async (project) => {
     await projectStore.setActiveProject(project);
     this.props.history.push(`/projects/${project.id}/configure`);
+  }
+
+  startProject = async (project) => {
+    await projectStore.setActiveProject(project);
+    this.props.history.push(`/projects/${project.id}/compare`);
   }
 
   createProject = async () => {
@@ -79,16 +83,26 @@ class ProjectsPage extends Component {
     });
   }
 
-  renderProject = (project) => {
+  start = (e) => {
+    e.preventDefault();
+
+    this.props.history.push(`/compare/${projectStore.state.activeProject.state.id}`);
+  }
+
+  renderProjectMenuItem = (project) => {
     return (
       <SubMenu key={project.id} title={<span><Icon type="folder" />{project.name}</span>}>
         <Menu.Item key={`${project.id}#settings`} onClick={() => { this.projectSettings(project) }}>
           <Icon type="setting" />
-          <span>Settings</span>
+          <span>Project Settings</span>
         </Menu.Item>
-        <Menu.Item key={`${project.id}#open`} onClick={() => { this.openProject(project) }}>
+        <Menu.Item key={`${project.id}#configure`} onClick={() => { this.projectConfiguration(project) }}>
           <Icon type="profile" />
-          <span>Open</span>
+          <span>Configure Properties</span>
+        </Menu.Item>
+        <Menu.Item key={`${project.id}#compare`} onClick={() => { this.startProject(project) }}>
+          <Icon type="check" />
+          <span>Start Comparison</span>
         </Menu.Item>
         <Menu.Item key={`${project.id}#delete`} onClick={() => { this.removeProject(project) }}>
           <Icon type="delete" />
@@ -100,8 +114,6 @@ class ProjectsPage extends Component {
 
   render() {
     const { projects, activeProject } = projectStore.state;
-
-    console.log('viewportWidth: ', this.state.viewportWidth);
 
     const Breadcrumbs = withBreadcrumbs([
       { path: '/projects/new', breadcrumb: 'New project' },
@@ -130,34 +142,39 @@ class ProjectsPage extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {viewportWidth > 767 && (
-          <Route path="/projects/:id" render={() => (
+          <Route path="/projects" render={() => (
             <Sider width={240} style={{ background: '#fff' }}>
+              <Title className="logo">
+                <Link to="/projects">RAVEL</Link>
+              </Title>
+              <Divider />
               <Menu
                 //onClick={this.handleClick}
                 //selectedKeys={[this.state.current]}
-                mode="horizontal"
+                mode="inline"
+                style={{ borderRight: 0 }}
               >
                 <Menu.Item
                   key="setting:1"
                   onClick={this.createProject}
-                  style={{ width: '100%', textAlign: 'center' }}
-                >New project</Menu.Item>
+                >
+                  <Icon type="plus" />
+                  <span>New project</span>
+                </Menu.Item>
+                {projects.map(this.renderProjectMenuItem)}
               </Menu>
               { /* <Button type="primary" onClick={() => { projectStore.updateProject({ 'id': '5c10d5962805c811fb912265', 'name': 'UPD ' + Math.random() })}}>Test</Button>
               <Button type="primary" onClick={() => { projectStore.setActiveProject(projects[0]) }}>Test 2</Button>
               <Button type="primary" onClick={() => { projectStore.update(s => s.activeProject.state.name = 'wtf') }}>Test 3</Button> */ }
-              <Menu
-                mode="inline"
-                style={{ borderRight: 0 }}
-              >
-                {projects.map(this.renderProject)}
-              </Menu>
             </Sider>
           )} />
         )}
         <Layout>
           <Layout style={{ padding: '0 24px 24px' }}>
-            <Breadcrumbs />
+            <Layout style={{ background: '#fff', padding: 24, margin: '24px 0', flexGrow: 0, flexDirection: 'row' }}>
+              <Breadcrumbs />
+              {activeProject && <Button type="primary" icon="check" onClick={this.start} style={{ marginLeft: 'auto' }}>Start</Button>}
+            </Layout>
             {/*<Breadcrumb style={{ margin: '16px 0' }}>
 
               {activeProject && <Breadcrumb.Item>{activeProject.state.name}</Breadcrumb.Item>}
@@ -165,19 +182,24 @@ class ProjectsPage extends Component {
           */}
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
               <Route exact path="/projects" render={() => (
-                <div>
-                  <h1>Workspace</h1>
-                  <p><span>Please select a project, or create a new one.</span></p>
-                  <p><Button type="primary" onClick={this.createProject}>New project</Button></p>
+                <>
+                  <Title>Projects</Title>
+                  <Paragraph>
+                    Please select an existing project, or create a new one.
+                  </Paragraph>
+                  <Paragraph>
+                    <Button type="primary" icon="plus" onClick={this.createProject}>New project</Button>
+                  </Paragraph>
                   <Menu
                     mode="inline"
                     style={{ borderRight: 0 }}
                   >
-                    {projects.map(this.renderProject)}
+                    {projects.map(this.renderProjectMenuItem)}
                   </Menu>
-                </div>
+                </>
               )} />
               <Route path="/projects/new" component={NewProject} />
+              <Route path="/projects/:id" exact component={EditProject} />
               <Route path="/projects/:id/settings" component={EditProject} />
               <Route path="/projects/:id/configure" component={Configure} />
             </Content>

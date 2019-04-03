@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Form, Input, Select, AutoComplete, Modal, Radio } from 'antd';
+import { Form, Input, Select, AutoComplete, Modal, Radio } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

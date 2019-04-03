@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Icon, Button, Row, Col, Form, Input } from 'antd';
+import { Layout, Button, Row, Col, Form, Input, Typography, Divider } from 'antd';
 import { Route, withRouter } from 'react-router-dom';
 
 import DatasetOptionsForm from './DatasetOptionsForm';
@@ -9,7 +9,7 @@ import { projectStore, Project } from './models/projects';
 
 const { Component } = React;
 const { Content } = Layout;
-const FormItem = Form.Item;
+const { Title, Paragraph, Text } = Typography;
 
 class NewProject extends Component {
   state = {
@@ -32,10 +32,10 @@ class NewProject extends Component {
 
   start = async (e) => {
     e.preventDefault();
-    
+
     const project = await projectStore.addProject(this.state.newProject);
     await projectStore.setActiveProject(project);
-    
+
     const { activeProject } = projectStore.state;
     this.props.history.push(`/projects/${activeProject.state.id}/configure`);
   }
@@ -96,29 +96,38 @@ class NewProject extends Component {
         <Route exact path="/projects/new" render={() =>
           <Layout style={{ height: '100%' }}>
             <Content style={{ background: '#fff', padding: 24, margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <h1>New project</h1>
-              <p>What would you like to do?</p>
-              <p>
+              <Title>New project</Title>
+              <Paragraph>
+                What would you like to do?
+              </Paragraph>
+              <Paragraph>
                 <Button type="primary" onClick={this.createNewAlignment}>Create a new alignment</Button>
-              </p>
-              <p>
+              </Paragraph>
+              <Paragraph>
                 <Button type="primary" onClick={this.validateExistingAlignment}>Validate an existing alignment</Button>
-              </p>
+              </Paragraph>
             </Content>
           </Layout>
         } />
         <Route path="/projects/new/create" render={() =>
           <Layout>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-              <h1>Create a new alignment</h1>
-              <p>So you want to create a new alignment? Okay!</p>
-              <p>Start by entering a name for your new project.</p>
-              <p>
-                <strong>Project name</strong>
+              <Title>Create a new alignment</Title>
+              <Paragraph>
+                So you want to create a new alignment? Okay!
+              </Paragraph>
+              <Paragraph>
+                Start by entering a name for your new project.
+              </Paragraph>
+              <Paragraph>
+                <Text strong>Project name</Text>
                 <Input value={newProject.name} onChange={this.handleProjectNameChange} />
-              </p>
+              </Paragraph>
 
-              <p>Then upload your datasets (supported formats: Turtle, TriG, N-Triples, N-Quads, Notation3 (N3). By default, the format will be automatically detected.</p>
+              <Paragraph>
+                Then upload your datasets (supported formats: Turtle, TriG, N-Triples, N-Quads, Notation3 (N3). By default, the format will be automatically detected.
+              </Paragraph>
+
               <Row type="flex" gutter={16}>
                 <Col>
                   <DatasetOptionsForm
@@ -138,33 +147,48 @@ class NewProject extends Component {
                 </Col>
               </Row>
 
-              <br />
-              <p>Once you're done, we can start!</p>
-              <p><Button type="primary" onClick={this.start}>Start</Button></p>
+              <Divider />
+
+              <Paragraph>
+                Once you're done, we can start!
+              </Paragraph>
+              <Paragraph>
+                <Button type="primary" onClick={this.start}>Start</Button>
+              </Paragraph>
             </Content>
           </Layout>
         } />
         <Route path="/projects/new/validate" render={() =>
           <Layout>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-              <h1>New project / Validate</h1>
-              <p>So you want to validate an existing alignment? Okay!</p>
-              <p>Start by entering a name for your new project.</p>
-              <p>
-                <strong>Project name</strong>
+              <Title>New project / Validate</Title>
+              <Paragraph>
+                So you want to validate an existing alignment? Okay!
+              </Paragraph>
+              <Paragraph>
+                Start by entering a name for your new project.
+              </Paragraph>
+              <Paragraph>
+                <Text strong>Project name</Text>
                 <Input value={newProject.name} onChange={this.handleProjectNameChange} />
-              </p>
+              </Paragraph>
 
-              <p>Now upload your alignment file (<a href="http://alignapi.gforge.inria.fr/edoal.html" target="_blank" rel="noreferrer noopener">EDOAL</a> format).</p>
+              <Paragraph>
+                Now upload your alignment file (<a href="http://alignapi.gforge.inria.fr/edoal.html" target="_blank" rel="noreferrer noopener">EDOAL</a> format).
+              </Paragraph>
+
               <AlignmentsOptionsForm
                 label="Alignments"
                 alignments={newProject.alignments}
                 onSave={this.onSaveAlignments}
               />
 
-              <br />
+              <Divider />
 
-              <p>Finally, upload the dataset(s) that contain the actual informations about the entities from your alignment file, because comparing URIs isn't fun (supported formats: Turtle, TriG, N-Triples, N-Quads, Notation3 (N3). By default, the format will be automatically detected.</p>
+              <Paragraph>
+                Finally, upload the dataset(s) that contain the actual informations about the entities from your alignment file, because comparing URIs isn't fun (supported formats: Turtle, TriG, N-Triples, N-Quads, Notation3 (N3). By default, the format will be automatically detected.
+              </Paragraph>
+
               <Row type="flex" gutter={16}>
                 <Col>
                   <DatasetOptionsForm
