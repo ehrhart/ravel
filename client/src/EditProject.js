@@ -25,6 +25,9 @@ class EditProject extends Component {
 
   onRouteChanged = async () => {
     const projectId = this.props.match.params.id;
+    if (projectId === 'new') {
+      return;
+    }
     const project = (await Api.get(`projects/${projectId}`)).data;
     if (project) {
       console.log('onRouteChanged, project: ', project);
