@@ -28,9 +28,9 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Connecting to MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ravel', {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
-  autoReconnect: true,
 });
 mongoose.connection.on('error', error => {
   console.error('Database connection error:', error);
