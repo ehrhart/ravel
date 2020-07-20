@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link, NavLink, Route, withRouter } from 'react-router-dom';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
 import { Layout, Menu, Button, Icon, Modal, Typography, Divider } from 'antd';
-import { throttle } from 'lodash';
 
 import NewProject from './NewProject';
 import EditProject from './EditProject';
 import Configure from './Configure';
 
+import { throttle } from './helpers/utils';
 import { projectStore } from './models/projects';
 
 const { Content, Sider } = Layout;

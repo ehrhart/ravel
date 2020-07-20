@@ -1,9 +1,10 @@
 import React from 'react';
 import { Layout, Row, Col, Input, Divider } from 'antd';
-import { debounce } from 'lodash';
 
 import DatasetOptionsForm from './DatasetOptionsForm';
 import AlignmentsOptionsForm from './AlignmentsOptionsForm';
+
+import { debounce } from './helpers/utils';
 import { projectStore } from './models/projects';
 
 const { Content } = Layout;
