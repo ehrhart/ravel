@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Button, Row, Col, Form, Input, Typography, Divider } from 'antd';
+import { Layout, Button, Row, Col, Input, Typography, Divider } from 'antd';
 import { Route, withRouter } from 'react-router-dom';
 
 import DatasetOptionsForm from './DatasetOptionsForm';
@@ -220,4 +220,4 @@ class NewProject extends Component {
   }
 }
 
-export default withRouter(Form.create()(NewProject));
+export default withRouter(NewProject);

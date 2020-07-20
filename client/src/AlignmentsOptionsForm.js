@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, Input, Select, Modal, Upload, Icon, Tabs, Typography } from 'antd';
+import { Button, Form, Input, Select, Modal, Upload, Tabs, Typography } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 
 import Api from './Api';
 
@@ -16,6 +17,8 @@ class AlignmentsOptionsForm extends React.Component {
     modalVisible: false,
   };
 
+  formRef = React.createRef();
+
   handleModalVisible = (flag) => {
     this.setState({
       modalVisible: !!flag,
@@ -28,7 +31,7 @@ class AlignmentsOptionsForm extends React.Component {
   }
 
   handleUploadChange = (info) => {
-    const { setFieldsValue } = this.props.form;
+    const { setFieldsValue } = this.formRef.current;
     console.log('handleUploadChange', info);
     let fileList = info.fileList;
 
@@ -90,8 +93,7 @@ class AlignmentsOptionsForm extends React.Component {
   }
 
   useSampleAlignments = () => {
-    const { form } = this.props;
-    form.setFieldsValue({
+    this.formRef.current.setFieldsValue({
       upload: null,
       url: './cotedazur_alignments.ttl',
       format: 'turtle',
@@ -100,19 +102,14 @@ class AlignmentsOptionsForm extends React.Component {
   }
 
   okHandle = async () => {
-    const { form } = this.props;
-    form.validateFields(async (err, fieldsValue) => {
-      if (err) return;
-
-      this.props.onSave(fieldsValue, () => {
-        this.handleModalVisible(false);
-      });
+    const fieldsValue = await this.formRef.current.validateFields();
+    this.props.onSave(fieldsValue, () => {
+      this.handleModalVisible(false);
     });
   }
 
   render() {
     const { alignments } = this.props;
-    const { getFieldDecorator } = this.props.form;
     const { modalVisible } = this.state;
 
     function displayAlignmentsName(alignments) {
@@ -148,56 +145,47 @@ class AlignmentsOptionsForm extends React.Component {
             </Button>,
           ]}
         >
-          <Form layout="vertical">
+          <Form ref={this.formRef} layout="vertical">
             <Tabs defaultActiveKey="1" size="small" tabPosition="left">
               <TabPane tab="Files" key="1">
                 <Paragraph>
                   <Button onClick={this.useSampleAlignments}>Use sample alignments</Button>
                 </Paragraph>
-                <FormItem label="Alignments Upload">
-                  {getFieldDecorator('upload', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: this.normFile,
-                  })(
-                    <Upload.Dragger
-                      name="file"
-                      showUploadList={true}
-                      action={`${Api.defaults.baseURL}projects/upload`}
-                      beforeUpload={this.beforeUpload}
-                      //onChange={this.handleUploadChange}
-                    >
-                      <Paragraph className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
-                      </Paragraph>
-                      <Paragraph className="ant-upload-text">
-                        Click or drag file to this area to upload
-                      </Paragraph>
-                    </Upload.Dragger>
-                  )}
+                <FormItem label="Alignments Upload" name="upload" valuePropName="fileList" getValueFromEvent={this.normFile}>
+                  <Upload.Dragger
+                    name="file"
+                    showUploadList={true}
+                    action={`${Api.defaults.baseURL}projects/upload`}
+                    beforeUpload={this.beforeUpload}
+                    //onChange={this.handleUploadChange}
+                  >
+                    <Paragraph className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </Paragraph>
+                    <Paragraph className="ant-upload-text">
+                      Click or drag file to this area to upload
+                    </Paragraph>
+                  </Upload.Dragger>
                 </FormItem>
-                <FormItem label="URL">
-                  {getFieldDecorator('url')(<Input style={{ width: 200 }} placeholder="Enter an URL" />)}
+                <FormItem label="URL" name="url">
+                  <Input style={{ width: 200 }} placeholder="Enter an URL" />
                 </FormItem>
               </TabPane>
               <TabPane tab="Options" key="2">
-                <FormItem label="Alignments format">
-                  {getFieldDecorator('format', {
-                    initialValue: alignments.format
-                  })(
-                    <Select
-                      showSearch
-                      style={{ width: '100%' }}
-                      placeholder="Select an alignments format"
-                      filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                    >
-                      <Option key="auto" value="auto">Automatic Detection</Option>
-                      <Option key="turtle" value="turtle">Turtle</Option>
-                      <Option key="trig" value="trig">TriG</Option>
-                      <Option key="triple" value="triple">N-Triples</Option>
-                      <Option key="quad" value="quad">N-Quads</Option>
-                      <Option key="n3" value="n3">Notation3 (N3)</Option>
-                    </Select>
-                  )}
+                <FormItem label="Alignments format" name="format" initialValue={alignments.format}>
+                  <Select
+                    showSearch
+                    style={{ width: '100%' }}
+                    placeholder="Select an alignments format"
+                    filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  >
+                    <Option key="auto" value="auto">Automatic Detection</Option>
+                    <Option key="turtle" value="turtle">Turtle</Option>
+                    <Option key="trig" value="trig">TriG</Option>
+                    <Option key="triple" value="triple">N-Triples</Option>
+                    <Option key="quad" value="quad">N-Quads</Option>
+                    <Option key="n3" value="n3">Notation3 (N3)</Option>
+                  </Select>
                 </FormItem>
               </TabPane>
             </Tabs>
@@ -207,16 +195,5 @@ class AlignmentsOptionsForm extends React.Component {
     )
   }
 }
-
-AlignmentsOptionsForm = Form.create({
-  mapPropsToFields(props) {
-    console.log('mapPropsToFields:', props.alignments);
-    return {
-      url: Form.createFormField({ value: props.alignments.url }),
-      upload: Form.createFormField({ value: props.alignments.upload }),
-      format: Form.createFormField({ value: props.alignments.format }),
-    };
-  }
-})(AlignmentsOptionsForm);
 
 export default AlignmentsOptionsForm;

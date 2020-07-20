@@ -1,4 +1,4 @@
-import N3 from 'n3';
+import * as N3 from 'n3';
 import axios from 'axios';
 import createStore from 'pure-store'
 

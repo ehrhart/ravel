@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, Input, Select, Modal, Upload, Icon, Tabs, Typography } from 'antd';
+import { Button, Form, Input, Select, Modal, Upload, Tabs, Typography } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 
 import Api from './Api';
 
@@ -16,6 +17,8 @@ class DatasetOptionsForm extends React.Component {
     modalVisible: false,
   };
 
+  formRef = React.createRef();
+
   handleModalVisible = (flag) => {
     this.setState({
       modalVisible: !!flag,
@@ -28,7 +31,7 @@ class DatasetOptionsForm extends React.Component {
   }
 
   handleUploadChange = (info) => {
-    const { setFieldsValue } = this.props.form;
+    const { setFieldsValue } = this.formRef.current;
     console.log('handleUploadChange', info);
     let fileList = info.fileList;
 
@@ -90,7 +93,7 @@ class DatasetOptionsForm extends React.Component {
   }
 
   useSampleDataset = () => {
-    const { form, datasetType } = this.props;
+    const { datasetType } = this.props;
     let url;
     switch (datasetType) {
       case 'source':
@@ -102,7 +105,7 @@ class DatasetOptionsForm extends React.Component {
       default:
         url = '';
     }
-    form.setFieldsValue({
+    this.formRef.current.setFieldsValue({
       upload: null,
       url,
       format: 'turtle',
@@ -111,19 +114,15 @@ class DatasetOptionsForm extends React.Component {
   }
 
   okHandle = async () => {
-    const { form, datasetType } = this.props;
-    form.validateFields(async (err, fieldsValue) => {
-      if (err) return;
-
-      this.props.onSave(datasetType, fieldsValue, () => {
-        this.handleModalVisible(false);
-      });
+    const { datasetType } = this.props;
+    const fieldsValue = await this.formRef.current.validateFields();
+    this.props.onSave(datasetType, fieldsValue, () => {
+      this.handleModalVisible(false);
     });
   }
 
   render() {
-    const { form, datasetType, dataset } = this.props;
-    const { getFieldDecorator } = form;
+    const { datasetType, dataset } = this.props;
     const { modalVisible } = this.state;
 
     function displayDatasetName(dataset) {
@@ -159,56 +158,47 @@ class DatasetOptionsForm extends React.Component {
             </Button>,
           ]}
         >
-          <Form layout="vertical">
+          <Form ref={this.formRef} layout="vertical">
             <Tabs defaultActiveKey="1" size="small" tabPosition="left">
               <TabPane tab="Files" key="1">
                 <Paragraph>
                   <Button onClick={this.useSampleDataset}>Use sample dataset</Button>
                 </Paragraph>
-                <FormItem label="Dataset Upload">
-                  {getFieldDecorator('upload', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: this.normFile,
-                  })(
-                    <Upload.Dragger
-                      name="file"
-                      showUploadList={true}
-                      action={`${Api.defaults.baseURL}projects/upload`}
-                      beforeUpload={this.beforeUpload}
-                      //onChange={this.handleUploadChange}
-                    >
-                      <Paragraph className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
-                      </Paragraph>
-                      <Paragraph className="ant-upload-text">
-                        Click or drag file to this area to upload
-                      </Paragraph>
-                    </Upload.Dragger>
-                  )}
+                <FormItem name="upload" label="Dataset Upload" valuePropName="fileList" getValueFromEvent={this.normFile}>
+                  <Upload.Dragger
+                    name="file"
+                    showUploadList={true}
+                    action={`${Api.defaults.baseURL}projects/upload`}
+                    beforeUpload={this.beforeUpload}
+                    //onChange={this.handleUploadChange}
+                  >
+                    <Paragraph className="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </Paragraph>
+                    <Paragraph className="ant-upload-text">
+                      Click or drag file to this area to upload
+                    </Paragraph>
+                  </Upload.Dragger>
                 </FormItem>
-                <FormItem label="URL">
-                  {getFieldDecorator('url')(<Input style={{ width: 200 }} placeholder="Enter an URL" />)}
+                <FormItem label="URL" name="url">
+                  <Input style={{ width: 200 }} placeholder="Enter an URL" />
                 </FormItem>
               </TabPane>
               <TabPane tab="Options" key="2">
-                <FormItem label="Dataset format">
-                  {getFieldDecorator('format', {
-                    initialValue: dataset.format
-                  })(
-                    <Select
-                      showSearch
-                      style={{ width: '100%' }}
-                      placeholder="Select a dataset format"
-                      filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                    >
-                      <Option key="auto" value="auto">Automatic Detection</Option>
-                      <Option key="turtle" value="turtle">Turtle</Option>
-                      <Option key="trig" value="trig">TriG</Option>
-                      <Option key="triple" value="triple">N-Triples</Option>
-                      <Option key="quad" value="quad">N-Quads</Option>
-                      <Option key="n3" value="n3">Notation3 (N3)</Option>
-                    </Select>
-                  )}
+                <FormItem label="Dataset format" name="format" initialValue={dataset.format}>
+                  <Select
+                    showSearch
+                    style={{ width: '100%' }}
+                    placeholder="Select a dataset format"
+                    filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  >
+                    <Option key="auto" value="auto">Automatic Detection</Option>
+                    <Option key="turtle" value="turtle">Turtle</Option>
+                    <Option key="trig" value="trig">TriG</Option>
+                    <Option key="triple" value="triple">N-Triples</Option>
+                    <Option key="quad" value="quad">N-Quads</Option>
+                    <Option key="n3" value="n3">Notation3 (N3)</Option>
+                  </Select>
                 </FormItem>
               </TabPane>
             </Tabs>
@@ -218,16 +208,5 @@ class DatasetOptionsForm extends React.Component {
     )
   }
 }
-
-DatasetOptionsForm = Form.create({
-  mapPropsToFields(props) {
-    console.log('mapPropsToFields:', props.dataset);
-    return {
-      url: Form.createFormField({ value: props.dataset.url }),
-      upload: Form.createFormField({ value: props.dataset.upload }),
-      format: Form.createFormField({ value: props.dataset.format }),
-    };
-  }
-})(DatasetOptionsForm);
 
 export default DatasetOptionsForm;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout, Menu, Progress, Pagination, Button, Row, Col, Icon } from 'antd';
+import { Layout, Menu, Progress, Pagination, Button, Row, Col } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
-import N3 from 'n3';
+import * as N3 from 'n3';
 
 import RdfEntity from './RdfEntity';
 import { projectStore } from './models/projects';
@@ -301,7 +302,7 @@ class Compare extends Component {
                 style={{ borderBottom: 0 }}
               >
                 <SubMenu title={<span className="submenu-title-wrapper">
-                  <Icon type="cloud-download" />Export alignments</span>}>
+                  <CloudDownloadOutlined />Export alignments</span>}>
                   <Menu.Item key="export:edoal" onClick={this.exportEDOAL}>EDOAL format (Turtle)</Menu.Item>
                   <Menu.Item key="export:owl" onClick={this.exportOWL}>OWL format (N-Triples)</Menu.Item>
                 </SubMenu>

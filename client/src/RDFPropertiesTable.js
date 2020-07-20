@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Button, Icon } from 'antd';
-import { DragDropContext, DragSource, DropTarget } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { Table, Button } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DndProvider, DropTarget, DragSource } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 
 import './RDFPropertiesTable.css';
@@ -141,10 +142,10 @@ class DragSortingTable extends React.Component {
       render: (text, record) => (
         <div>
           <Button onClick={() => this.props.onEdit(record) }>
-            <Icon type="edit" />
+            <EditOutlined />
           </Button>
           <Button type="danger" onClick={() => this.props.onRemove(record) }>
-            <Icon type="delete" />
+            <DeleteOutlined />
           </Button>
         </div>
       )
@@ -169,18 +170,20 @@ class DragSortingTable extends React.Component {
 
   render() {
     return (
-      <Table
-        rowKey="propertyName"
-        columns={this.columns}
-        dataSource={this.props.data}
-        components={this.components}
-        onRow={(record, index) => ({
-          index,
-          moveRow: this.moveRow,
-        })}
-      />
+      <DndProvider backend={HTML5Backend}>
+        <Table
+          rowKey="propertyName"
+          columns={this.columns}
+          dataSource={this.props.data}
+          components={this.components}
+          onRow={(record, index) => ({
+            index,
+            moveRow: this.moveRow,
+          })}
+        />
+      </DndProvider>
     );
   }
 }
 
-export default DragDropContext(HTML5Backend)(DragSortingTable);
+export default DragSortingTable;

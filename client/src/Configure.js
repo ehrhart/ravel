@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Button, Select, Typography, Divider } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 
 import RDFPropertiesTable from './RDFPropertiesTable';
@@ -113,10 +114,11 @@ class Configure extends Component {
     e.preventDefault();
 
     this.setState({
-      mapPropsToFields: {},
+      mapPropsToFields: null,
       addOrEdit: true,
+    }, () => {
+      this.handleModalVisible(true);
     });
-    this.handleModalVisible(true);
   }
 
   handleAdd = (fields) => {
@@ -228,7 +230,7 @@ class Configure extends Component {
             placeholder="Select an RDF type"
             optionFilterProp="children"
             onChange={this.onSelectSourceRdfType}
-            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
             {rdfTypesList}
           </Select>
@@ -243,7 +245,7 @@ class Configure extends Component {
             placeholder="Select an RDF type"
             optionFilterProp="children"
             onChange={this.onSelectTargetRdfType}
-            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
             {rdfTypesList}
           </Select>
@@ -266,7 +268,7 @@ class Configure extends Component {
           <Divider />
 
           <Paragraph>
-            <Button type="primary" icon="check" onClick={this.start}>Start</Button>
+            <Button type="primary" icon={<CheckOutlined />} onClick={this.start}>Start</Button>
           </Paragraph>
         </Content>
 
@@ -276,7 +278,7 @@ class Configure extends Component {
           handleModalVisible={this.handleModalVisible}
           modalVisible={modalVisible}
           addOrEdit={addOrEdit}
-          mapPropsToFields = {mapPropsToFields}
+          mapPropsToFields={mapPropsToFields}
         />
       </div>
     )

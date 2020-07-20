@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Icon, Button, Menu, Typography, Divider } from 'antd';
+import { Layout, Button, Menu, Typography, Divider } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 
 import { projectStore } from './models/projects';
@@ -70,7 +71,7 @@ class Home extends Component {
             </Paragraph>
             <Title level={2}>Current Projects</Title>
             <Paragraph>
-              You currently have {loading ? <Icon type="loading" spin /> : projectStore.state.projects.length} project(s).
+              You currently have {loading ? <LoadingOutlined spin /> : projectStore.state.projects.length} project(s).
             </Paragraph>
 
             <Divider />

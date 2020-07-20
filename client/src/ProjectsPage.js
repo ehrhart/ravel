@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Route, withRouter } from 'react-router-dom';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
-import { Layout, Menu, Button, Icon, Modal, Typography, Divider } from 'antd';
+import { Layout, Menu, Button, Modal, Typography, Divider } from 'antd';
+import { CheckOutlined, PlusOutlined, DeleteOutlined, ProfileOutlined, SettingOutlined, FolderOutlined } from '@ant-design/icons';
 
 import NewProject from './NewProject';
 import EditProject from './EditProject';
@@ -57,7 +58,7 @@ class ProjectsPage extends Component {
 
   startProject = async (project) => {
     await projectStore.setActiveProject(project);
-    this.props.history.push(`/projects/${project.id}/compare`);
+    this.props.history.push(`/compare/${project.id}`);
   }
 
   createProject = async () => {
@@ -91,21 +92,21 @@ class ProjectsPage extends Component {
 
   renderProjectMenuItem = (project) => {
     return (
-      <SubMenu key={project.id} title={<span><Icon type="folder" />{project.name}</span>}>
+      <SubMenu key={project.id} title={<span><FolderOutlined />{project.name}</span>}>
         <Menu.Item key={`${project.id}#settings`} onClick={() => { this.projectSettings(project) }}>
-          <Icon type="setting" />
+          <SettingOutlined />
           <span>Project Settings</span>
         </Menu.Item>
         <Menu.Item key={`${project.id}#configure`} onClick={() => { this.projectConfiguration(project) }}>
-          <Icon type="profile" />
+          <ProfileOutlined />
           <span>Configure Properties</span>
         </Menu.Item>
         <Menu.Item key={`${project.id}#compare`} onClick={() => { this.startProject(project) }}>
-          <Icon type="check" />
+          <CheckOutlined />
           <span>Start Comparison</span>
         </Menu.Item>
         <Menu.Item key={`${project.id}#delete`} onClick={() => { this.removeProject(project) }}>
-          <Icon type="delete" />
+          <DeleteOutlined />
           <span>Delete</span>
         </Menu.Item>
       </SubMenu>
@@ -128,8 +129,8 @@ class ProjectsPage extends Component {
       <div>
         {breadcrumbs.map((breadcrumb, index) => (
           <span key={breadcrumb.key}>
-            <NavLink to={breadcrumb.props.match.url}>
-              {breadcrumb}
+            <NavLink to={breadcrumb.match.url}>
+              {breadcrumb.breadcrumb}
             </NavLink>
             {(index < breadcrumbs.length - 1) && <i> / </i>}
           </span>
@@ -158,7 +159,7 @@ class ProjectsPage extends Component {
                   key="setting:1"
                   onClick={this.createProject}
                 >
-                  <Icon type="plus" />
+                  <PlusOutlined />
                   <span>New project</span>
                 </Menu.Item>
                 {projects.map(this.renderProjectMenuItem)}
@@ -173,7 +174,7 @@ class ProjectsPage extends Component {
           <Layout style={{ padding: '0 24px 24px' }}>
             <Layout style={{ background: '#fff', padding: 24, margin: '24px 0', flexGrow: 0, flexDirection: 'row' }}>
               <Breadcrumbs />
-              {activeProject && <Button type="primary" icon="check" onClick={this.start} style={{ marginLeft: 'auto' }}>Start</Button>}
+              {activeProject && <Button type="primary" icon={<CheckOutlined />} onClick={this.start} style={{ marginLeft: 'auto' }}>Start</Button>}
             </Layout>
             {/*<Breadcrumb style={{ margin: '16px 0' }}>
 
@@ -188,7 +189,7 @@ class ProjectsPage extends Component {
                     Please select an existing project, or create a new one.
                   </Paragraph>
                   <Paragraph>
-                    <Button type="primary" icon="plus" onClick={this.createProject}>New project</Button>
+                    <Button type="primary" icon={<PlusOutlined />} onClick={this.createProject}>New project</Button>
                   </Paragraph>
                   <Menu
                     mode="inline"
